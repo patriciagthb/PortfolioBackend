@@ -12,41 +12,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/acerca")
+@RequestMapping("/api")
 public class AcercaDeController {
     
     @Autowired
     private IAcercaDeService acercaServ;
     
-    @GetMapping("/get/acerca")
+    @GetMapping("/acerca/get")
     public List<AcercaDe> getAcerca(){
     return acercaServ.getAcerca();
     }
     
     
-    @GetMapping("/ver/acerca")
+    @GetMapping("/acerca/ver")
     @ResponseBody
     public List<AcercaDe> verAcercaDe(){
         return acercaServ.verAcercaDe();
     }
     
-    @PostMapping("new/acerca")
+    @PostMapping("/acerca/new")
     public void crearAcercaDe(@RequestBody AcercaDe acerca){
         acercaServ.crearAcercaDe(acerca);
     }
     
-    @DeleteMapping("/delete/acerca/{id}")
+    @DeleteMapping("/acerca/delete/{id}")
     public void borrarAcercaDe(@PathVariable int id){
         acercaServ.borrarAcercaDe(id);
     }
     
-    @PutMapping("/update/{id}")
+    @PutMapping("/acerca/update/{id}")
       public void updateAcerca(@PathVariable int id, @RequestBody AcercaDe acerca){
 
           AcercaDe acercaNuevo=acercaServ.buscarAcercabyId(id);
@@ -54,22 +53,11 @@ public class AcercaDeController {
           
           acercaServ.updateAcerca(acercaNuevo);
       }
-              
-              
-              
-//    @PutMapping("/update/{id}")    ok  
-//    public AcercaDe updateAcerca(@PathVariable int id, @RequestParam("acercaDe") String a){
-//        AcercaDe acerca  = acercaServ.buscarAcercabyId(id);
-//        acerca.setAcercaDe(a);
-//        acercaServ.updateAcerca(acerca); 
-//        return acerca;
-//    }
     
-    @GetMapping("/findById/{id}")
+    @GetMapping("/acerca/findById/{id}")
     public AcercaDe buscarAcercaById(@PathVariable int id){
         return acercaServ.buscarAcercabyId(id);
         
     }
-
     
 }

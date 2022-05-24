@@ -17,40 +17,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/proyectos")
+@RequestMapping("/api")
 public class ProyectosContoller {
     
     @Autowired
     private IProyectosService proyServ;
     
-    @GetMapping("/get/proy")
+    @GetMapping("/proyectos/get")
     public List<Proyectos> getEnc(){
         return proyServ.getProy();
     }
     
-    @PostMapping("/new/proy")
+    @PostMapping("/proyectos/new")
     public void crearProy(@RequestBody Proyectos proyectos){
         proyServ.crearProy(proyectos);
     }
     
-    @DeleteMapping("/delete/proy/{id}")
+    @DeleteMapping("/proyectos/delete/{id}")
     public void deleteProy(@PathVariable int id){
         proyServ.deleteProy(id);
     }
     
-    @PutMapping("/update/proy/{id}")
-    public void updateProy(@PathVariable int id,
-                           @RequestParam("nombre") String nombre,
-                           @RequestParam("descripcion") String descripcion,
-                           @RequestParam("fecha") String fecha,
-                           @RequestParam("imagenes") String imagenes){
-        Proyectos proyectos = proyServ.buscarProyById(id);
-        
-        proyectos.setNombre(nombre);
-        proyectos.setDescripcion(descripcion);
-        proyectos.setFecha(fecha);
-        proyectos.setImagenes(imagenes);
-        
-        proyServ.updateProy(proyectos);
-    }
+
 }

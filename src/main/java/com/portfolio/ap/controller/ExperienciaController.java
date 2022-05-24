@@ -16,28 +16,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/experiencia")
+@RequestMapping("/api")
 public class ExperienciaController {
 
     @Autowired
     private IExperienciaService expServ;
 
-    @GetMapping("/get/exp")
+    @GetMapping("/experiencia/get")
     public List<Experiencia> getEnc() {
         return expServ.getExp();
     }
 
-    @PostMapping("/new")
+    @PostMapping("/experiencia/new")
     public void crearExp(@RequestBody Experiencia experiencia) {
         expServ.crearExp(experiencia);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/experiencia/delete/{id}")
     public void deleteExp(@PathVariable int id) {
         expServ.deleteExp(id);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/experiencia/update/{id}")
     public void updateExp(@PathVariable int id, @RequestBody Experiencia exp){
         
         Experiencia nuevaExp= expServ.buscarExpById(id);
@@ -52,31 +52,12 @@ public class ExperienciaController {
     }
  
     
-    @GetMapping("findById/{id}")
+    @GetMapping("/experiencia/findById/{id}")
     public Experiencia buscarEducbyId(@PathVariable int id){
           return expServ.buscarExpById(id);
       }
-    
-    
-//    @PutMapping("/update/exp/{id}")
-//    public void updateExp(@PathVariable int id,
-//            @RequestParam("empresa") String empresa,
-//            @RequestParam("puesto") String puesto,
-//            @RequestParam("desde") String desde,
-//            @RequestParam("hasta") String hasta,
-//            @RequestParam("ubicacion") String ubicacion,
-//            @RequestParam("logo") String logo) {
-//        Experiencia experiencia = expServ.buscarExpById(id);
-//
-//        experiencia.setEmpresa(empresa);
-//        experiencia.setPuesto(puesto);
-//        experiencia.setDesde(desde);
-//        experiencia.setHasta(hasta);
-//        experiencia.setUbicacion(ubicacion);
-//        experiencia.setLogo(logo);
-//
-//        expServ.updateExp(experiencia);
-//    }
+        
+
     
     
     

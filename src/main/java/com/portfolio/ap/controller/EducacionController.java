@@ -16,28 +16,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/educacion")
+@RequestMapping("/api")
 public class EducacionController {
 
     @Autowired
     private IEducacionService educServ;
 
-    @GetMapping("/get/educ")
+    @GetMapping("/educacion/get")
     public List<Educacion> getEduc() {
         return educServ.getEduc();
     }
 
-    @PostMapping("/new")
+    @PostMapping("/educacion/new")
     public void crearEduc(@RequestBody Educacion educacion) {
         educServ.crearEduc(educacion);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/educacion/delete/{id}")
     public void deletEduc(@PathVariable int id) {
         educServ.deleteEduc(id);
     }
     
-        @PutMapping("/update/{id}")
+        @PutMapping("/educacion/update/{id}")
       public void updateEduc(@PathVariable int id, @RequestBody Educacion educacion){
 
           Educacion nuevaEduc= educServ.buscarEducById(id);
@@ -51,27 +51,8 @@ public class EducacionController {
           educServ.updateEduc(nuevaEduc);
       }
 
-//    @PutMapping("/update/educ/{id}")
-//    public void updateEduc(@PathVariable int id,
-//            @RequestParam("institucion") String insti,
-//            @RequestParam("titulo") String titulo,
-//            @RequestParam("desde") String desde,
-//            @RequestParam("hasta") String hasta,
-//            @RequestParam("ubicacion") String ubic,
-//            @RequestParam("logo") String logo) {
-//        Educacion educacion = educServ.buscarEducById(id);
-//
-//        educacion.setInstitucion(insti);
-//        educacion.setTitulo(titulo);
-//        educacion.setDesde(desde);
-//        educacion.setHasta(hasta);
-//        educacion.setUbicacion(ubic);
-//        educacion.setLogo(logo);
-//
-//        educServ.updateEduc(educacion);
-//    }
       
-      @GetMapping("findById/{id}")
+      @GetMapping("/educacion/findById/{id}")
       public Educacion buscarEducbyId(@PathVariable int id){
           return educServ.buscarEducById(id);
       }

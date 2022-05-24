@@ -12,42 +12,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/habilidades")
+@RequestMapping("/api")
 public class HabilidadesController {
 
     @Autowired
     private IHabilidadesService habServ;
 
-    @GetMapping("/get/hab")
+    @GetMapping("/habilidades/get")
     public List<Habilidades> getEnc() {
         return habServ.getHab();
     }
 
-    @PostMapping("/new/hab")
+    @PostMapping("/habilidades/new")
     public void crearHab(@RequestBody Habilidades habilidades) {
         habServ.crearHab(habilidades);
     }
 
-    @DeleteMapping("/delete/hab/{id}")
+    @DeleteMapping("/habilidades/delete/{id}")
     public void deleteHab(@PathVariable int id) {
         habServ.deleteHab(id);
     }
 
-    @PutMapping("/update/hab/{id}")
-    public void updateHab(@PathVariable int id,
-            @RequestParam("nombre") String nombre,
-            @RequestParam("porcentaje") int porcentaje) {
-        Habilidades habilidades = habServ.buscarHabById(id);
+    @PutMapping("/habilidades/update/{id}")
+    public void updateHab(@PathVariable int id, @RequestBody Habilidades habilidades) {
 
-        habilidades.setNombre(nombre);
-        habilidades.setPorcentaje(porcentaje);
+        Habilidades nuevaHab = habServ.buscarHabById(id);
+        nuevaHab.setNombre(habilidades.getNombre());
+        nuevaHab.setPorcentaje(habilidades.getPorcentaje());
 
-        habServ.updateHab(habilidades);
+        habServ.updateHab(nuevaHab);
+    }
+
+    @GetMapping("/habilidades/findById/{id}")
+    public Habilidades buscarHabById(@PathVariable int id) {
+        return habServ.buscarHabById(id);
     }
 
 }

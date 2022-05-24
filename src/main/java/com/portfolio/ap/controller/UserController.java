@@ -10,45 +10,42 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api")
 public class UserController {
     
     @Autowired
     private UserRepository UserRepository;
     
-    @GetMapping("/api/user/{id}")
+    @GetMapping("/user/{id}")
     @ResponseBody
     public User usuario(@PathVariable Integer id){
         return(UserRepository.findById(id).get());
     }
+
     
-//    @GetMapping("/api/user/username")
-//    @ResponseBody
-//    public User usuario(){
-//        return (UserRepository.findByUsername("patricia"));
-//    }
-    
-    @PostMapping("/api/user/login")
+    @PostMapping("/user/login")
     @ResponseBody
     public User login(@RequestBody User u){
         return(UserRepository.findByUsernameAndPassword(u.getUsername(), u.getPassword()));
     }
     
-    @PostMapping("/api/user/add")
+    @PostMapping("/user/add")
     public void newUser(@RequestBody User u){
         UserRepository.save(u);
     }
     
-    @PutMapping("/api/user/edit")
+    @PutMapping("/user/edit")
     public void editUser(@RequestBody User u){
         UserRepository.save(u);
     }
     
-    @DeleteMapping("api/user/delete/{id}")
+    @DeleteMapping("/user/delete/{id}")
     public void deleteUser(@PathVariable Integer id){
         UserRepository.deleteById(id);
     }    

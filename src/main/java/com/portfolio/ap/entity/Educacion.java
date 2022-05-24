@@ -31,12 +31,6 @@ public class Educacion {
     @Column(name="logo")
     private String logo;
     
-//    @ManyToOne
-//    @JoinColumn(name="encabezado_id_persona", nullable=false)
-//    private Encabezado encabezado;
-
-
-
     
     
 }
